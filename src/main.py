@@ -156,7 +156,6 @@ def sort(count_array):
 
     g.print(count_array,bubble_time_array,merge_time_array);
 
-
 def main():
     count_array=[1000,2000,3000,4000,5000,6000]
 
@@ -166,4 +165,3 @@ def main():
 #Точка входа в программу
 if __name__ == "__main__":
    main()
-
