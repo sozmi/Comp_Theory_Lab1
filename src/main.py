@@ -1,17 +1,14 @@
-import os
 import numpy as np
 import time
+import modules.graph as g
+import modules.sort as s
+import modules.file_manager as fm
 
-from ast import Constant
-from itertools import count
-from module import graph as g
-from module import sort
 #константы
 SEPARATOR_CHAR =', '
-PATH ="src/files/"
+PATH ="../files/"
 PATH_READ = PATH+"arr_read_"
 TXT=".txt"
-
 
 #Превращение массива в строку
 def array_to_string(array):
@@ -35,43 +32,8 @@ def array_create(count,path):
     '''
     rand_array = np.random.randint(0,1000,count)
     s=array_to_string(rand_array)
-    file_writer(path, s)
+    fm.file_writer(path, s)
     return len(rand_array)
-
-#получение полного пути файла
-def file_get_full_path(filename):
-    '''
-    Получить полный путь до файла
-    @param filename - наименование файла
-    @returns путь до файла с заданным наименованием
-    '''
-    file_dir = os.path.abspath(os.path.dirname(__file__))
-    file_to_save = os.path.join(file_dir, '..', filename)
-    return file_to_save
-
-#запись в файл
-def file_writer(filename, save_string):
-    '''
-    Запись в файл
-    @param filename - имя файла
-    @param row_array - массив данных строки таблицы
-    '''
-    file_name_to_save = file_get_full_path(filename)
-    with open(file_name_to_save,'a',encoding = 'utf-8') as resultFile:
-        resultFile.write(save_string)
-
-#Чтение из файла
-def file_reader(filename):
-    '''
-    Чтение из файла
-    @param filename - имя файла
-    '''
-    file = open(filename,"r")
-    array = file.read()
-    array = array.split(SEPARATOR_CHAR)
-    array = list(map(int, array)) 
-    file.close()
-    return array
 
 #Получить время работы сортировки
 def get_time( method_to_run,array):
@@ -98,26 +60,26 @@ def sort(count_array):
     for i in range(count):
         COUNT =str(count_array[i])
 
-        arr_bubble = file_reader(PATH_READ+COUNT+TXT) #получение массива из файла
+        arr_bubble = fm.file_reader(PATH_READ+COUNT+TXT) #получение массива из файла
         arr_merge =arr_bubble.copy()
 
-        bubble_time_array[i] = get_time(bubble_sort, arr_bubble)
-        merge_time_array[i] = get_time(merge_sort, arr_merge)
+        bubble_time_array[i] = get_time(s.bubble_sort, arr_bubble)
+        merge_time_array[i] = get_time(s.merge_sort, arr_merge)
 
-        file_writer(PATH + "arr_bubble_write_"+COUNT+TXT, array_to_string(arr_bubble))
-        file_writer(PATH + "arr_merge_write_"+COUNT+TXT, array_to_string(arr_merge))
+        fm.file_writer(PATH + "arr_bubble_write_"+COUNT+TXT, array_to_string(arr_bubble))
+        fm.file_writer(PATH + "arr_merge_write_"+COUNT+TXT, array_to_string(arr_merge))
 
         print("Count: " + COUNT, end=' ')
         print("\tBubble Sort Time:" + str(bubble_time_array[i]), end=' ')
         print("\tMerge Sort Time:" + str(merge_time_array[i]))
 
-    g.print(count_array,bubble_time_array,merge_time_array);
+    g.print(count_array, bubble_time_array,merge_time_array)
 
 def main():
-    count_array=[1000,2000,3000,4000,5000,6000]
+    COUNT_ARRAY=[1000,2000,3000,4000,5000,6000]
 
-    #create(count_array)
-    sort(count_array)
+    #create(COUNT_ARRAY)
+    sort(COUNT_ARRAY)
 
 #Точка входа в программу
 if __name__ == "__main__":

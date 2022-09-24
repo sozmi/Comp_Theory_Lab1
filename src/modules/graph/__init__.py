@@ -23,7 +23,7 @@ def print(x,y1,y2):
     plt.subplot(1, 1, 1)
 
     plt.scatter(numpy_x, numpy_y1, label = 'bubble') # точечный график по x_numpy, y_numpy
-    plt.plot(numpy_x, linear_trend1(numpy_x), linestyle='dashed', color="blue", label = 'linear trend')
+    plt.plot(numpy_x, linear_trend1(numpy_x), linestyle='dashed', color="blue", label = 'polynom trend')
 
     plt.scatter(numpy_x, numpy_y2, label = 'merge') # точечный график по x_numpy, y_numpy
     plt.plot(numpy_x, linear_trend2(numpy_x), linestyle='dashed', color="red", label = 'linear trend') 
