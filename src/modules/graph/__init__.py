@@ -40,5 +40,5 @@ def print(x,y1,y2):
     
     # Покажем окно с нарисованным графиком
     plt.show()
-    fig.savefig("lab01_part02_manual.png")
+    fig.savefig("src/files/lab01_part02_manual.png")
 
